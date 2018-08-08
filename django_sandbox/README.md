@@ -4,7 +4,7 @@
 pipenvはpipでインストールできます．
 ## 開発環境
 * Mac OS 10.13.6
-* python 3.7
+* python 3.7（追記：Herokuは3.6.6までしか対応してない）
 * Herokuの環境構築済み
 ## 1.ローカル環境での動作確認
 リポジトリをクローンしてきた後に，django_sandboxに移動し，以下のコマンドを実行します．
@@ -24,17 +24,24 @@ Pipfileに書かれたscriptsのstartのコマンドを実行します．
 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ## 2.Herokuにデプロイ
-
+以下のコマンドを実行しHerokuの初期設定を行います．
 ```
 $ heroku create
-$ heroku git:remote -a [上記実行時に出たアプリケーション名] 
+$ git remote add heroku [上記で出たgitのURL]
 $ heroku config:set DISABLE_COLLECTSTATIC=1
+```
+
+
+続いてHerokuにデプロイするために以下のコマンドを実行します．
+```
 $ git init
 $ git add .
-$ git commit -m “first commit”
+$ git commit -m "first commit"
 $ git push heroku master
 $ heroku run python manage.py migrate
 ```
+以上でHerokuへのデプロイが完了しました．
+
 
 
 ## 付録1：コマンドについて
@@ -43,7 +50,7 @@ pipenvを用いているのでコマンドを使う際は以下のようにす�
 $ pipenv run [コマンド]
 ```
 
-以下，よく使うコマンドを使いやすいようにしました．
+以下，よく使うコマンドを使いやすいように設定してあります．
 
 ### アプリの作成
 ```
